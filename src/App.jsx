@@ -16,6 +16,8 @@ import Code from './components/auth/Code';
 import ResetPass from './components/auth/resetPass';
 import Categories from './components/pages/Categories';
 import ProductDetails from './components/pages/productDetails'
+import CategoryDetails from './components/pages/categoryDetails';
+import BrandDetails from './components/pages/brandDetails';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -62,7 +64,16 @@ const router = createBrowserRouter([
   {
   path: "productDetails/:id",
   element: <ProductDetails />,
-}
+},
+{
+    path: "category/:id",
+    element: <CategoryDetails />,
+  },
+  {
+    path: "brand/:id",
+    element: <BrandDetails />,
+  }
+
     ],
   },
   

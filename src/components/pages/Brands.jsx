@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
+// import BrandDetails from "./BrandDetails";
 export default function Brands() {
   const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   async function getBrands() {
     try {
@@ -39,6 +41,7 @@ export default function Brands() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {brands.map((brand) => (
           <div
+            onClick={() => navigate(`/brand/${brand._id}`)}
             key={brand._id}
             className="border rounded-xl shadow-md p-4 hover:shadow-xl transition duration-300"
           >
