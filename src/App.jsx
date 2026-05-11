@@ -11,6 +11,9 @@ import Layout from './components/shared/Layout';
 import Home from './components/pages/Home';
 import Products from './components/pages/Products';
 import Brands from './components/pages/Brands';
+import Forgotpass from './components/auth/Forgotpass'
+import Code from './components/auth/Code';
+import ResetPass from './components/auth/resetPass';
 import Categories from './components/pages/Categories';
 const router = createBrowserRouter([
   {
@@ -42,6 +45,18 @@ const router = createBrowserRouter([
       {
     path: "/login",
     element: <Login />,
+  },
+      {
+    path: "/forgot-password",
+    element: <Forgotpass />,
+  },
+  {
+    path: "/code",
+    element: <Code />,
+  },
+  {
+    path: "/resetpassword",
+    element: <ResetPass />,
   },
     ],
   },

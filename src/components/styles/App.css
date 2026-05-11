@@ -63,8 +63,9 @@ body,
 }
 
 .error-msg {
+ 
   color: red;
-  margin-top: 10px;
+  
 }
 
 .success-msg {
@@ -72,31 +73,56 @@ body,
   margin-top: 10px;
 }
 .register-container {
-  width: 320px;
-  /* background-color: aqua; */
-  margin: 50px auto;
-  text-align: center;
+  /* height: 400px; */
+  width: 1200px;
+ margin: auto;
+  padding: 20px;
+ 
 }
 
+.register-container label {
+  font-size: 14px;
+  /* font-weight: bold; */
+  /* margin-top: 10px; */
+  text-align: left;
+  /* background-color: #099009; */
+}
+.register-now {
+  font-size: 24px;
+  /* font-weight: bold; */
+  margin-bottom: 20px;
+}
 .register-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  /* gap: 10px; */
 }
 
 .register-input {
-  padding: 10px;
+  padding: 2px;
   border-radius: 6px;
   border: 1px solid #ccc;
   outline: none;
+  margin-bottom: 10px;  
+  position: relative;
 }
-
+.options{
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+}
 .register-input:focus {
   border-color: #0aad0a;
 }
+.btn-container {
+  display: flex;
+  justify-content: space-between;
 
+}
 .register-btn {
-  padding: 10px;
+  width: 100px;
+  height: 40px;
+  /* padding: 10px; */
   background-color: #0aad0a;
   color: white;
   border: none;
@@ -113,7 +139,16 @@ body,
   opacity: 0.7;
   cursor: not-allowed;
 }
-
+.logged{
+  font-size: 14px;
+  /* font-weight: bold; */
+  margin-top: 10px;
+}
+.login-link {
+  color: #0aad0a;
+  cursor: pointer;
+  font-weight: bold;
+}
 .error-msg {
   color: red;
   margin-top: 10px;

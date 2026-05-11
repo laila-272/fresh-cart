@@ -2,72 +2,116 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../styles/app.css";
 import { useNavigate } from "react-router-dom";
-// import Home from "./Home";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+const validationSchema = yup.object({
+  email: yup
+    .string()
+    .email("Invalid email")
+    .required("Email is required"),
+
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
+
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-    const navigate = useNavigate();
-  const handleLogin = async (e) => {
-    e.preventDefault();
 
-    setLoading(true);
-    setError("");
-    setSuccess("");
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
 
-    try {
-      const res = await axios.post(
-        "https://ecommerce.routemisr.com/api/v1/auth/signin",
-        {
-          email,
-          password,
-        }
-      );
+    validationSchema,
 
-      console.log(res.data);
+    onSubmit: async (values, { setSubmitting }) => {
+      setError("");
 
-      setSuccess("Login successful 🎉");
+      try {
+        const res = await axios.post(
+          "https://ecommerce.routemisr.com/api/v1/auth/signin",
+          values
+        );
 
-      localStorage.setItem("token", res.data.token);
-      navigate("/home");
-    } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
-    } finally {
-      setLoading(false);
-    }
-  };
+        console.log(res.data);
+
+        localStorage.setItem("token", res.data.token);
+
+        navigate("/home");
+      } catch (error) {
+        console.log(error);
+
+        setError(
+          error.response?.data?.message || "Login failed"
+        );
+      } finally {
+        setSubmitting(false);
+      }
+    },
+  });
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
+    <div style={{marginTop:"60px"}} className="register-container">
+      <span className="register-now">Login now:</span>
 
-      <form onSubmit={handleLogin} className="login-form">
+      <form onSubmit={formik.handleSubmit} className="register-form">
+
+        <label>Email:</label>
         <input
+          name="email"
           type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="login-input"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          className="register-input"
         />
+        {formik.touched.email && formik.errors.email && (
+          <p className="error-msg">{formik.errors.email}</p>
+        )}
 
+        <label>Password:</label>
         <input
+          name="password"
           type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="login-input"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          className="register-input"
         />
+        {formik.touched.password && formik.errors.password && (
+          <p className="error-msg">{formik.errors.password}</p>
+        )}
 
-        <button type="submit" className="login-btn" disabled={loading}>
-          {loading ? "Loading..." : "Login"}
-        </button>
+        {error && <p className="error-msg">{error}</p>}
+
+        <div className="btn-container">
+          <div className="options">
+           <span className="login-link"
+              onClick={() => navigate("/forgot-password")}>forgot password?</span>
+            <span
+              className="login-link"
+              onClick={() => navigate("/register")}
+            >
+              sign up
+            </span>
+
+          </div>
+
+          <button
+            type="submit"
+            className="register-btn"
+            disabled={formik.isSubmitting}
+          >
+            {formik.isSubmitting ? "Loading..." : "Login"}
+          </button>
+        </div>
       </form>
-
-      {error && <p className="error-msg">{error}</p>}
-
-      {success && <p className="success-msg">{success}</p>}
     </div>
   );
 }

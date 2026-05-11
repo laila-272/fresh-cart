@@ -1,114 +1,146 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import "../styles/app.css";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+const validationSchema = yup.object({
+  name: yup.string().required("Name is required"),
+
+  email: yup
+    .string()
+    .email("Invalid email")
+    .required("Email is required"),
+
+  phone: yup
+    .string()
+    .matches(/^01[0125][0-9]{8}$/, "Invalid Egyptian phone")
+    .required("Phone is required"),
+
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+
+  rePassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Passwords must match")
+    .required("Confirm password is required"),
+});
 
 export default function Register() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    rePassword: "",
-    phone: "",
+  const navigate = useNavigate();
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      phone: "",
+      password: "",
+      rePassword: "",
+    },
+    validationSchema,
+    onSubmit: async (values) => {
+      try {
+        const res = await axios.post(
+          "https://ecommerce.routemisr.com/api/v1/auth/signup",
+          values
+        );
+
+        localStorage.setItem("token", res.data.token);
+        navigate("/login");
+      } catch (error) {
+  console.log(error);
+
+  setError(
+    error.response?.data?.message || "User already exists"
+  );
+}
+    },
   });
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-const navigate = useNavigate();
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleRegister = async (e) => {
-    e.preventDefault();
-
-    setLoading(true);
-    setError("");
-    setSuccess("");
-
-    try {
-      const res = await axios.post(
-        "https://ecommerce.routemisr.com/api/v1/auth/signup",
-        formData
-      );
-
-      console.log(res.data);
-
-      setSuccess("Account created successfully 🎉");
-
-      localStorage.setItem("token", res.data.token);
-      navigate("/login");
-    } catch (err) {
-      setError(err.response?.data?.message || "Register failed");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="register-container">
-      <h2>Register</h2>
+      <span className="register-now">Register now:</span>
 
-      <form onSubmit={handleRegister} className="register-form">
+      <form onSubmit={formik.handleSubmit} className="register-form">
+
+        <label>Name:</label>
         <input
           name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
+          value={formik.values.name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           className="register-input"
         />
+        {formik.touched.name && formik.errors.name && (
+          <p className="error-msg">{formik.errors.name}</p>
+        )}
 
+        <label>Email:</label>
         <input
           name="email"
           type="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           className="register-input"
         />
+        {formik.touched.email && formik.errors.email && (
+          <p className="error-msg">{formik.errors.email}</p>
+        )}
 
+        <label>Phone:</label>
         <input
           name="phone"
-          placeholder="Phone"
-          value={formData.phone}
-          onChange={handleChange}
+          value={formik.values.phone}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           className="register-input"
         />
+        {formik.touched.phone && formik.errors.phone && (
+          <p className="error-msg">{formik.errors.phone}</p>
+        )}
 
+        <label>Password:</label>
         <input
           name="password"
           type="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           className="register-input"
         />
+        {formik.touched.password && formik.errors.password && (
+          <p className="error-msg">{formik.errors.password}</p>
+        )}
 
+        <label>Re Password:</label>
         <input
           name="rePassword"
           type="password"
-          placeholder="Re Password"
-          value={formData.rePassword}
-          onChange={handleChange}
+          value={formik.values.rePassword}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           className="register-input"
         />
+        {formik.touched.rePassword && formik.errors.rePassword && (
+          <p className="error-msg">{formik.errors.rePassword}</p>
+        )}
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="register-btn"
-        >
-          {loading ? "Loading..." : "Register"}
-        </button>
+        <div className="btn-container">
+          <div className="logged">
+            Already have an account?{" "}
+            <span className="login-link" onClick={() => navigate("/login")}>
+              Login
+            </span>
+          </div>
+          <button type="submit" className="register-btn">
+            Register
+          </button>
+        </div>
       </form>
-
-      {error && <p className="error-msg">{error}</p>}
-
-      {success && <p className="success-msg">{success}</p>}
     </div>
   );
 }
