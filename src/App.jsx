@@ -15,6 +15,7 @@ import Forgotpass from './components/auth/Forgotpass'
 import Code from './components/auth/Code';
 import ResetPass from './components/auth/resetPass';
 import Categories from './components/pages/Categories';
+import ProductDetails from './components/pages/productDetails'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Register />,
       },
       {path: "home",
       element: <Home />
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
     path: "/resetpassword",
     element: <ResetPass />,
   },
+  {
+  path: "productDetails/:id",
+  element: <ProductDetails />,
+}
     ],
   },
   
