@@ -4,6 +4,7 @@ import "../styles/app.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import api from "../../utils/api";
 
 const validationSchema = yup.object({
   email: yup
@@ -30,8 +31,8 @@ export default function Forgotpass() {
       setSuccess("");
 
       try {
-        const res = await axios.post(
-          "https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords",
+        const res = await api.post(
+          "/auth/forgotPasswords",
           values
         );
 

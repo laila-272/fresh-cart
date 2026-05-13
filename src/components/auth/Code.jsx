@@ -4,7 +4,7 @@ import "../styles/app.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import api from "../../utils/api";
 const validationSchema = yup.object({
   resetCode: yup
     .string()
@@ -32,8 +32,8 @@ export default function Code() {
       setSuccess("");
 
       try {
-        const res = await axios.post(
-          "https://ecommerce.routemisr.com/api/v1/auth/verifyResetCode",
+        const res = await api.post(
+          "/auth/verifyResetCode",
           values
         );
 

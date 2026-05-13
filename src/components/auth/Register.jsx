@@ -4,6 +4,7 @@ import "../styles/app.css";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import api from "../../utils/api";
 
 const validationSchema = yup.object({
   name: yup.string().required("Name is required"),
@@ -43,8 +44,8 @@ export default function Register() {
     validationSchema,
     onSubmit: async (values) => {
       try {
-        const res = await axios.post(
-          "https://ecommerce.routemisr.com/api/v1/auth/signup",
+        const res = await api.post(
+          "/auth/signup",
           values
         );
 

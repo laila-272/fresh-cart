@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import api from "../../utils/api";
 
 export default function CategoryDetails() {
   const { id } = useParams();
@@ -15,8 +16,8 @@ export default function CategoryDetails() {
 
   const getCategoryDetails = async () => {
     try {
-      const res = await axios.get(
-        `https://ecommerce.routemisr.com/api/v1/categories/${id}`
+      const res = await api.get(
+        `/categories/${id}`
       );
 
       setCategory(res.data.data);

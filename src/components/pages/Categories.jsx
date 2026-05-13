@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../../utils/api";
+
 export default function Categories() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const getCategories = async () => {
     try {
-      const res = await axios.get(
-        "https://ecommerce.routemisr.com/api/v1/categories"
+      const res = await api.get(
+        "/categories"
       );
 
       setCategories(res.data.data);

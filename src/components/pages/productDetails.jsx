@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import api from "../../utils/api";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -15,8 +16,8 @@ export default function ProductDetails() {
 
   const getProductDetails = async () => {
     try {
-      const res = await axios.get(
-        `https://ecommerce.routemisr.com/api/v1/products/${id}`
+      const res = await api.get(
+        `/products/${id}`
       );
 
       setProduct(res.data.data);

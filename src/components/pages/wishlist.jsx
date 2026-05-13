@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import baseUrl from "../../utils/baseUrl";
+import api from "../../utils/api";
 export default function Wishlist() {
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,8 +14,8 @@ export default function Wishlist() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await axios.get(
-        `${baseUrl}/api/v1/wishlist`,
+      const res = await api.get(
+        "/wishlist",
         {
           headers: {
             token: token,
@@ -43,8 +43,8 @@ export default function Wishlist() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await axios.delete(
-        `${baseUrl}/api/v1/wishlist/${productId}`,
+      const res = await api.delete(
+        `/wishlist/${productId}`,
         {
           headers: {
             token: token,

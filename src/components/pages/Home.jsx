@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../../utils/api";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
 
   async function getProducts() {
     try {
-      const res = await axios.get(
-        "https://ecommerce.routemisr.com/api/v1/products",
-        {
-          // params: {
-          //   sort: "-price",
-           
-          //   "price[gte]": 100,
-          //   page: 1,
-          // },
-        },
+      const res = await api.get(
+        "/products"
       );
 
       console.log(res.data);

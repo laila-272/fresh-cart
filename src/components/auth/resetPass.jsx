@@ -4,6 +4,7 @@ import "../styles/app.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
+import api from "../../utils/api";
 
 const validationSchema = yup.object({
   newPassword: yup
@@ -33,8 +34,8 @@ export default function ResetPass() {
       setSuccess("");
 
       try {
-        const res = await axios.put(
-          "https://ecommerce.routemisr.com/api/v1/auth/resetPassword",
+        const res = await api.put(
+          "/auth/resetPassword",
           {
             email,
             newPassword: values.newPassword,

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // import BrandDetails from "./BrandDetails";
+  import api from "../../utils/api";
+
 export default function Brands() {
   const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,8 +11,8 @@ export default function Brands() {
 
   async function getBrands() {
     try {
-      const { data } = await axios.get(
-        "https://ecommerce.routemisr.com/api/v1/brands"
+      const { data } = await api.get(
+        "/brands"
       );
 
       setBrands(data.data);
