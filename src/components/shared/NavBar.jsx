@@ -55,6 +55,12 @@ export default function NavBar() {
         <Link to="/register" style={styles.link}>
           Register
         </Link>
+        <Link to="/wishlist" style={styles.link}>
+          Wishlist
+        </Link>
+        <Link to="/cart" style={styles.link}>
+          Cart
+        </Link>
       </div>
     </nav>
   );

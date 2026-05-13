@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../utils/api";
-
+import "../styles/cart.css";
 export default function cart() {
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(true);

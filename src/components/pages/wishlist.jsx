@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import api from "../../utils/api";
+import "../styles/wishlist.css";
 export default function Wishlist() {
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,6 +11,7 @@ export default function Wishlist() {
     getWishlist();
   }, []);
 
+  
   const getWishlist = async () => {
     try {
       const token = localStorage.getItem("token");

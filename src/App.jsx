@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './components/styles/App.css'
-import Register from './components/auth/register'
+import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 import NavBar from './components/shared/NavBar'
 import { createBrowserRouter } from "react-router-dom";
@@ -17,7 +17,9 @@ import ResetPass from './components/auth/resetPass';
 import Categories from './components/pages/Categories';
 import ProductDetails from './components/pages/productDetails'
 import CategoryDetails from './components/pages/categoryDetails';
-import BrandDetails from './components/pages/brandDetails';
+// import BrandDetails from './components/pages/brandDetails';
+import Wishlist from './components/pages/Wishlist';
+import Cart from './components/pages/cart';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -69,9 +71,17 @@ const router = createBrowserRouter([
     path: "category/:id",
     element: <CategoryDetails />,
   },
+  // {
+  //   path: "brand/:id",
+  //   element: <BrandDetails />,
+  // },
   {
-    path: "brand/:id",
-    element: <BrandDetails />,
+    path: "wishlist",
+    element: <Wishlist />,
+  },
+  {
+    path: "cart",
+    element: <Cart />,
   }
 
     ],
