@@ -76,32 +76,31 @@ export default function cart() {
   if (error) return <h2>{error}</h2>;
 
   if (!cart || cart?.products.length === 0) {
-    return <h2>Your cart is empty 🛒</h2>;
+    return <h2>Your cart is empty </h2>;
   }
 
   return (
     <div className="cart-container">
-      <h1>My Cart</h1>
+      <div className="cartheader d-flex justify-content-between align-items-center">
+        <div className="cartprice">
+          {" "}
+          <span>shop cart:</span>
+          <p>Total Cart Price: {cart.totalCartPrice} EGP</p>
+        </div>
 
-      <h3>
-        Total Price: {cart.totalCartPrice} EGP
-      </h3>
-
-      <button onClick={clearCart}>
-        Clear Cart
-      </button>
+        <button onClick={clearCart}>Clear Cart</button>
+      </div>
 
       <div className="cart-products">
         {cart?.products.map((item) => (
-          <div
-            key={item.product._id}
-            className="cart-item"
-          >
-            <img
-              src={item.product.imageCover}
-              alt={item.product.title}
-              width="150"
-            />
+          <div key={item.product._id} className="cart-item">
+            <div className="productimg">
+              <img
+                src={item.product.imageCover}
+                alt={item.product.title}
+                width="150"
+              />
+            </div>
 
             <h2>{item.product.title}</h2>
 
@@ -109,22 +108,11 @@ export default function cart() {
 
             <p>Quantity: {item.count}</p>
 
-            <button
-              onClick={() =>
-                removeItem(item.product._id)
-              }
-            >
-              Remove
-            </button>
+            <button onClick={() => removeItem(item.product._id)}>Remove</button>
 
             <div className="quantity-buttons">
               <button
-                onClick={() =>
-                  updateCount(
-                    item.product._id,
-                    item.count - 1
-                  )
-                }
+                onClick={() => updateCount(item.product._id, item.count - 1)}
               >
                 -
               </button>
@@ -132,12 +120,7 @@ export default function cart() {
               <span>{item.count}</span>
 
               <button
-                onClick={() =>
-                  updateCount(
-                    item.product._id,
-                    item.count + 1
-                  )
-                }
+                onClick={() => updateCount(item.product._id, item.count + 1)}
               >
                 +
               </button>

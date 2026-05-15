@@ -1,11 +1,16 @@
+/* Reset (اختياري لو مش عندك global reset) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 html,
 body,
 #root {
   height: 100%;
-  margin: 0;
+  margin: 0 !important;
   
 }
-
 .layout {
   min-height: 100vh;
   display: flex;
@@ -160,11 +165,11 @@ body,
 }
 .product-card {
   width: 200px;
-  height: 300px;
+  /* height: 300px; */
   padding: 15px;
   border: 1px solid #eee;
   border-radius: 10px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   transition: 0.3s;
 }
 
@@ -225,4 +230,78 @@ body,
 
 .product-card h3 {
   font-size: 16px;
+}
+
+
+/* Nav */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background-color: #ebebec;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* Left section */
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Logo */
+.logoImg {
+  width: 120px;
+}
+
+/* Links */
+.links {
+  display: flex;
+  gap: 15px;
+}
+
+/* Link style */
+.link {
+  color: #72818C;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Right section */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Social icons */
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Icon */
+.icon {
+  color: #000;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Hover effect */
+.icon:hover {
+  transform: scale(1.1);
+  color: #0aad0a;
+}
+
+.link:hover {
+  color: #0aad0a;
 }

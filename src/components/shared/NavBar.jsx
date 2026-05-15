@@ -9,112 +9,56 @@ import {
 } from "react-icons/fa";
 
 import logo from "../../assets/E-Commerce assets/images/freshcart-logo.svg";
+import "../styles/app.css";
 
 export default function NavBar() {
   return (
-    <nav style={styles.nav}>
+    <nav className="navbar">
       {/* Left */}
-      <div style={styles.leftSection}>
+      <div className="leftSection">
         <div>
-          <img src={logo} alt="FreshCart Logo" style={styles.logoImg} />
+          <img src={logo} alt="FreshCart Logo" className="logoImg" />
         </div>
 
-        <div style={styles.links}>
-          <Link to="/" style={styles.link}>
+        <div className="links">
+          <Link to="/" className="link">
             Home
           </Link>
-
-          <Link to="/products" style={styles.link}>
+          <Link to="/products" className="link">
             Products
           </Link>
-
-          <Link to="/categories" style={styles.link}>
+          <Link to="/categories" className="link">
             Categories
           </Link>
-
-          <Link to="/brands" style={styles.link}>
+          <Link to="/brands" className="link">
             Brands
           </Link>
         </div>
       </div>
 
       {/* Right */}
-      <div style={styles.right}>
-        <div style={styles.socials}>
-          <FaFacebook style={styles.icon} />
-          <FaInstagram style={styles.icon} />
-          <FaTwitter style={styles.icon} />
-          <FaTiktok style={styles.icon} />
-          <FaYoutube style={styles.icon} />
+      <div className="right">
+        <div className="socials">
+          <FaFacebook className="icon" />
+          <FaInstagram className="icon" />
+          <FaTwitter className="icon" />
+          <FaTiktok className="icon" />
+          <FaYoutube className="icon" />
         </div>
 
-        <Link to="/login" style={styles.link}>
+        <Link to="/login" className="link">
           Login
         </Link>
-
-        <Link to="/register" style={styles.link}>
+        <Link to="/register" className="link">
           Register
         </Link>
-        <Link to="/wishlist" style={styles.link}>
+        <Link to="/wishlist" className="link">
           Wishlist
         </Link>
-        <Link to="/cart" style={styles.link}>
+        <Link to="/cart" className="link">
           Cart
         </Link>
       </div>
     </nav>
   );
 }
-
-const styles = {
-  nav: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "12px 20px",
-    backgroundColor: "#F8F9FA",
-    width: "100%",
-    flexWrap: "wrap",
-  },
-
-  leftSection: {
-    display: "flex",
-    alignItems: "center",
-    gap: "30px",
-  },
-
-  logoImg: {
-    width: "120px",
-  },
-
-  links: {
-    display: "flex",
-    gap: "15px",
-  },
-
-  link: {
-    color: "#72818C",
-    textDecoration: "none",
-    fontSize: "14px",
-    fontWeight: "500",
-  },
-
-  right: {
-    display: "flex",
-    alignItems: "center",
-    gap: "15px",
-  },
-
-  socials: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-  },
-
-  icon: {
-    color: "#000",
-    fontSize: "18px",
-    cursor: "pointer",
-    transition: "0.3s",
-  },
-};
